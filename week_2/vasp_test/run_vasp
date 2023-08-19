@@ -1,0 +1,16 @@
+#!/bin/bash 
+#PBS -N MATSE580
+#PBS -l nodes=1:ppn=24
+#PBS -l feature=rhel7
+#PBS -o job.out
+#PBS -e job.err
+#PBS -l mem=10gb
+#PBS -l walltime=00:10:00
+#PBS -A open
+
+export UCX_TLS=all
+cd $PBS_O_WORKDIR
+module purge
+module use /gpfs/group/RISE/sw7/modules
+module load vasp/vasp-5.4.1a
+mpirun -np $PBS_NP --hostfile $PBS_NODEFILE vasp_std
